@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center mb-4">Quiz Results</h2>
+<div class="row">
+    <div class="col-md-6 offset-md-3">
+        <div class="card mb-4">
+            <div class="card-body">
+                <h5 class="card-title">Your Performance</h5>
+                <p>Score: {{ score }} / 5</p>  <!-- Updated to show maximum questions correctly -->
+                <p>Total Score: {{ total_score }}</p>
+                <p>Current Level: {{ level }}</p>
+            </div>
+        </div>
+        
+        <h3 class="mb-3">Leaderboard</h3>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>User</th>
+                    <th>Total Score</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user_progress in leaderboard %}
+                    <tr>
+                        <td>{{ forloop.counter }}</td>
+                        <td>{{ user_progress.user.username }}</td>
+                        <td>{{ user_progress.total_score }}</td>  <!-- Ensure total_score is displayed -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        
+        <div class="text-center mt-4">
+            <a href="{% url 'quiz' %}" class="btn btn-primary">Take Another Quiz</a>
+            <a href="{% url 'home' %}" class="btn btn-secondary">Go to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

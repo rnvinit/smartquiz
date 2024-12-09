@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="text-center mb-4">Welcome, {{ user.username }}!</h2>
+<form method="post">
+    {% csrf_token %}
+    <input type="hidden" name="total_questions" value="{{ total_questions }}">
+    <input type="hidden" name="question_id" value="{{ question.id }}">  <!-- Hidden input for question ID -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">{{ question_number }}. {{ question.text }}</h5>
+            {% for choice in question.choice_set.all %}
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answer" id="choice_{{ choice.id }}" value="{{ choice.id }}" required>
+                    <label class="form-check-label" for="choice_{{ choice.id }}">
+                        {{ choice.text }}
+                    </label>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="text-center">
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <a href="{% url 'home' %}" class="btn btn-secondary">Quit</a>
+    </div>
+</form>
+{% endblock %}

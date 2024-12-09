@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center mb-4">Welcome to SmartQuiz System</h1>
+<div class="row">
+    <div class="col-md-6 offset-md-3 text-center">
+        <p>Test your knowledge with our adaptive learning system!</p>
+        {% if user.is_authenticated %}
+            <a href="{% url 'quiz' %}" class="btn btn-primary">Start Quiz</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn btn-primary">Login to Start</a>
+            <p class="mt-3">New user? <a href="{% url 'signup' %}">Sign up here</a></p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
